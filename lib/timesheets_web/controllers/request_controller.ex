@@ -5,15 +5,12 @@ defmodule TimesheetsWeb.RequestController do
   alias Timesheets.Requests.Request
 
   def index(conn, _params) do
-    changeset = Requests.change_request(%Request{})
     requests = Requests.list_requests()
-    render(conn, "index.html", changeset: changeset, requests: requests)
+    render(conn, "index.html", requests: requests)
   end
 
-  def new(conn, _params, %{"user_id" => id, "manager_id" => manager_id}) do
+  def new(conn, _params) do
     changeset = Requests.change_request(%Request{})
-    IO.puts("here")
-    IO.inspect(conn)
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -31,8 +28,7 @@ defmodule TimesheetsWeb.RequestController do
 
   def show(conn, %{"id" => id}) do
     request = Requests.get_request!(id)
-    tasks = Tasks.get_tasks_by_request_id(id)
-    render(conn, "show.html", request: request, tasks: tasks)
+    render(conn, "show.html", request: request)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -41,17 +37,17 @@ defmodule TimesheetsWeb.RequestController do
     render(conn, "edit.html", request: request, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "request" => request_params}) do
+  def update(conn, %{"id" => id}) do
     request = Requests.get_request!(id)
 
-    case Requests.update_request(request, request_params) do
+    case Requests.update_request(request) do
       {:ok, request} ->
         conn
         |> put_flash(:info, "Request updated successfully.")
         |> redirect(to: Routes.request_path(conn, :show, request))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", request: request, changeset: changeset)
+        render(conn, "index.html", request: request, changeset: changeset)
     end
   end
 

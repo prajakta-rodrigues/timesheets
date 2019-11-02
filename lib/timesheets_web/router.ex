@@ -23,9 +23,8 @@ defmodule TimesheetsWeb.Router do
 
     get("/", PageController, :index)
     resources("/users", UserController)
-    resources("/sessions", SessionController, only: [:new, :create, :delete], singleton: true)
     resources("/requests", RequestController)
-    resources("/tasks", TaskController)
+    resources("/sessions", SessionController, only: [:new, :create, :delete], singleton: true)
   end
 
   scope "/ajax", TimesheetsWeb do

@@ -3,21 +3,16 @@
 <ul>
 
   <li>
-    <strong>User:</strong>
-    <%= @request.user_id %>
+    <strong>Approval:</strong>
+    <%= @request.approval %>
   </li>
 
   <li>
-    <strong>Manager:</strong>
-    <%= @request.manager_id %>
-  </li>
-
-  <li>
-    <strong>Tasks:</strong>
-    <%= @request.tasks %>
+    <strong>Date:</strong>
+    <%= @request.date %>
   </li>
 
 </ul>
 
-<span><%= link "Edit", to: Routes.request_path(@conn, :edit, @request) %></span>
+
 <span><%= link "Back", to: Routes.request_path(@conn, :index) %></span>

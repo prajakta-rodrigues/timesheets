@@ -3,10 +3,10 @@ defmodule Timesheets.Requests.Request do
   import Ecto.Changeset
 
   schema "requests" do
-    field :manager_id, :integer
-    belongs_to :user, Timesheets.Users.User
+    field :approval, :boolean, default: false
     field :date, :date
-    field :approved, :boolean
+    field :user_id, :id
+    field :manager_id, :id
 
     timestamps()
   end
@@ -14,7 +14,14 @@ defmodule Timesheets.Requests.Request do
   @doc false
   def changeset(request, attrs) do
     request
-    |> cast(attrs, [:user_id, :manager_id, :date])
-    |> validate_required([:user_id, :manager_id, :date])
+    |> cast(attrs, [:approval, :date, :user_id, :manager_id])
+    |> validate_required([:approval, :date, :user_id, :manager_id])
+  end
+
+  @doc false
+  def update(request) do
+    request = Map.put(request, :approval, true)
+    IO.inspect(request)
+    request
   end
 end

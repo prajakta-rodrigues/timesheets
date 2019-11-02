@@ -1,42 +1,72 @@
 <h1>Listing Requests</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Manager</th>
-      <th>Tasks</th>
+<%= if @current_user.role == "worker" do %>
+  <span><%= link "New Request", to: Routes.request_path(@conn, :new) %></span>
+    <div class="col-md-12">
+      <div class="row">
+      <div class="col-md-4 col-sm-4">
+        <span>Approval Status</span>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <span>Date</span>
+      </div>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
+    </div>
+    </div>
+
 <%= for request <- @requests do %>
-    <tr>
-      <td><%= request.user_id %></td>
-      <td><%= request.manager_id %></td>
-      <td><%= request.tasks %></td>
 
-      <td>
-        <span><%= link "Show", to: Routes.request_path(@conn, :show, request) %></span>
-        <span><%= link "Edit", to: Routes.request_path(@conn, :edit, request) %></span>
-        <span><%= link "Delete", to: Routes.request_path(@conn, :delete, request), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
+      <div class="col-md-12">
+        <div class="row">
+        <div class="col-md-4 col-sm-4"
+      <%= if request.approval === true do %>
+    <span>Approved</span>
+      <% else %>
+        <span>Not Yet
+        </span>
+
+      <% end %>
+</div>
+
+
+<div class="col-md-4 col-sm-4">
+
+      <span><%= request.date %></span>
+    </div>
+
+    </div>
+  </div>
 <% end %>
-  </tbody>
-</table>
+<% else %>
+<div class = "col-md-12">
+  <div class="col-md-12">
+    <div class="row">
+    <div class="col-md-4 col-sm-4">
+      <span>Approve</span>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <span>Date</span>
+    </div>
+  </div>
+  </div>
 
+  <%= for request <- @requests do %>
+  <%= if request.approval === false && request.manager_id == @current_user.id do %>
+    <div class="col-md-12">
+      <div class="row">
+      <div class="col-md-4 col-sm-4"
 
-<%= form_for @changeset, @action, fn f -> %>
-      <div class="form-group">
-        <label for="date">Date: </label>
-         <%= date_input f, :date, value: :date, class: "form-control" %>
-         <%= error_tag f, :date %>
-       </div>
+        <span>
+        <%= link "Approve Request", to: Routes.request_path(@conn, :update, request.id) %></span>
 
-<span><%= link "New Request", to: Routes.request_path(@conn,
-:new, %{:user_id => @current_user.id,
-:manager_id => @current_user.manager_id}) %></span>
+  </div>
 
+  <div class="col-md-4 col-sm-4">
+
+    <span><%= request.date %></span>
+  </div>
+  </div>
+  </div>
+  <% end %>
+<% end %>
 <% end %>

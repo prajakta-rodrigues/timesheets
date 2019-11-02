@@ -2,13 +2,14 @@
   <%=if @current_user do %>
   <%= if @current_user.role == "manager" do %>
   <h2> Role: Manager </h2>
+    <p><%= link "View Workers Requests", to: Routes.request_path(@conn, :index) %> </p>
   <% else %>
   <div class = "col-md-12">
-    <span><%=link "View my requests",
-    to: Routes.request_path(@conn, :index) , class: "btn btn-primary"%>
+    <span>my req
     </span>
-  </div>
 
+  </div>
+  <p><%= link "View My Requests", to: Routes.request_path(@conn, :update) %> </p>
 
   <% end %>
   <% else %>

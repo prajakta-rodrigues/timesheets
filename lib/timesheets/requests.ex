@@ -67,9 +67,9 @@ defmodule Timesheets.Requests do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_request(%Request{} = request, attrs) do
+  def update_request(%Request{} = request) do
     request
-    |> Request.changeset(attrs)
+    |> Request.update()
     |> Repo.update()
   end
 

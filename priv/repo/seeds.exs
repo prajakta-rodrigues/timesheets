@@ -12,7 +12,7 @@
 
 alias Timesheets.Repo
 alias Timesheets.Users.User
-alias Timesheets.Jobs.Job
+
 
 IO.inspect(Argon2.add_hash("password")[:password_hash])
 
@@ -26,5 +26,3 @@ password_hash: pw,}
 Repo.insert!(user2)
 Repo.insert!(user1)
 
-Repo.insert!(%Job{code: "Job1", name: "development"})
-Repo.insert!(%Job{code: "Job2", name: "testing"})

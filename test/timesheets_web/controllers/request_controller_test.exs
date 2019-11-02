@@ -3,9 +3,9 @@ defmodule TimesheetsWeb.RequestControllerTest do
 
   alias Timesheets.Requests
 
-  @create_attrs %{manager_id: 42, tasks: [], user_id: 42}
-  @update_attrs %{manager_id: 43, tasks: [], user_id: 43}
-  @invalid_attrs %{manager_id: nil, tasks: nil, user_id: nil}
+  @create_attrs %{approval: true, date: ~D[2010-04-17]}
+  @update_attrs %{approval: false, date: ~D[2011-05-18]}
+  @invalid_attrs %{approval: nil, date: nil}
 
   def fixture(:request) do
     {:ok, request} = Requests.create_request(@create_attrs)
