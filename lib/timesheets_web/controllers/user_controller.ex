@@ -27,7 +27,7 @@ defmodule TimesheetsWeb.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Users.get_user_with_photos!(id)
+    user = Users.get_user_requests_by_id!(id)
     render(conn, "show.html", user: user)
   end
 

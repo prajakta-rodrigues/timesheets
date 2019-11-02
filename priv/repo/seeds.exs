@@ -12,5 +12,19 @@
 
 alias Timesheets.Repo
 alias Timesheets.Users.User
+alias Timesheets.Jobs.Job
 
-Repo.insert!(%User{name: "Alice", email: "alice@example.com"})
+IO.inspect(Argon2.add_hash("password")[:password_hash])
+
+pw = Argon2.add_hash("password")[:password_hash]
+
+user1 = %User{id: 2, name: "Alice", email: "alice@example.com", role: "worker",
+password_hash: pw, manager_id: 1}
+user2 = %User{id: 1, name: "Joe", email: "joe@example.com", role: "manager",
+password_hash: pw,}
+
+Repo.insert!(user2)
+Repo.insert!(user1)
+
+Repo.insert!(%Job{code: "Job1", name: "development"})
+Repo.insert!(%Job{code: "Job2", name: "testing"})

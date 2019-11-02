@@ -1,8 +1,17 @@
-<h1>Timesheets: a Photo Sharing App</h1>
+<div class="col-md-12">
+  <%=if @current_user do %>
+  <%= if @current_user.role == "manager" do %>
+  <h2> Role: Manager </h2>
+  <% else %>
+  <div class = "col-md-12">
+    <span><%=link "View my requests",
+    to: Routes.request_path(@conn, :index) , class: "btn btn-primary"%>
+    </span>
+  </div>
 
-<h2>Recent Photos</h2>
 
-<div class="row my-4">
-  
-  <h1>Just Testing</h1>
+  <% end %>
+  <% else %>
+  <h3> Welcome to this application </h3>
+  <% end %>
 </div>
