@@ -1,0 +1,31 @@
+<h1>Show User</h1>
+
+<%= if @user.id == @current_user.id do %>
+  <p><%= link "Edit Profile", to: Routes.user_path(@conn, :edit, @user) %></p>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </li>
+</ul>
+
+<h2>Photos</h2>
+
+<%= if @user.id == @current_user.id do %>
+  <p><%= link("New Photo", to: Routes.photo_path(@conn, :new)) %></p>
+<% end %>
+
+<div class="row">
+  <%= for photo <- @user.photos do %>
+    <%= render LensWeb.PhotoView, "card.html", Map.put(assigns, :photo, photo) %>
+  <% end %>
+</div>
+
