@@ -9,7 +9,7 @@
     </span>
 
   </div>
-  <p><%= link "View My Requests", to: Routes.request_path(@conn, :update) %> </p>
+  <p><%= link "View My Requests", to: Routes.request_path(@conn, :index) %> </p>
 
   <% end %>
   <% else %>
