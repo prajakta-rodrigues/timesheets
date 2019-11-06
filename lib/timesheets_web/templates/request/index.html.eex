@@ -57,7 +57,7 @@
       <div class="col-md-4 col-sm-4"
 
         <span>
-        <%= link "Approve Request", to: Routes.request_path(@conn, :update, request.id) %></span>
+        <%= link "View Request", to: Routes.request_path(@conn, :show, request.id) %></span>
 
   </div>
 

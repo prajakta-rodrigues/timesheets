@@ -18,10 +18,5 @@ defmodule Timesheets.Requests.Request do
     |> validate_required([:approval, :date, :user_id, :manager_id])
   end
 
-  @doc false
-  def update(request) do
-    request = Map.put(request, :approval, true)
-    IO.inspect(request)
-    request
-  end
+  
 end

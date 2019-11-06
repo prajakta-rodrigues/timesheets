@@ -14,5 +14,30 @@
 
 </ul>
 
+<%= if @current_user && @current_user.role == "manager" do %>
+<!-- <span><%= link "Approve", to:
+Routes.request_path(@conn, :edit, @request) %></span> -->
+
+
+<%= form_for @changeset, Routes.request_path(@conn, :update, @request), fn f ->%>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+     <%= hidden_input f, :approval, value: true, class: "form-control" %>
+   </div>
+
+
+  <div>
+    <%= submit "Approve" %>
+  </div>
+<% end %>
+
+
+<% end %>
+
 
 <span><%= link "Back", to: Routes.request_path(@conn, :index) %></span>
