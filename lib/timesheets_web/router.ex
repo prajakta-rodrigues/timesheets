@@ -24,6 +24,7 @@ defmodule TimesheetsWeb.Router do
     get("/", PageController, :index)
     resources("/users", UserController)
     resources("/requests", RequestController)
+    resources("/tasks", TaskController)
     resources("/sessions", SessionController, only: [:new, :create, :delete], singleton: true)
   end
 

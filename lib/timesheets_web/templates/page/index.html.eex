@@ -4,11 +4,7 @@
   <h2> Role: Manager </h2>
     <p><%= link "View Workers Requests", to: Routes.request_path(@conn, :index) %> </p>
   <% else %>
-  <div class = "col-md-12">
-    <span>my req
-    </span>
-
-  </div>
+  
   <p><%= link "View My Requests", to: Routes.request_path(@conn, :index) %> </p>
 
   <% end %>

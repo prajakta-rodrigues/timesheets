@@ -3,6 +3,7 @@ defmodule TimesheetsWeb.RequestController do
 
   alias Timesheets.Requests
   alias Timesheets.Requests.Request
+  alias Timesheets.Tasks
 
   def index(conn, _params) do
     requests = Requests.list_requests()
@@ -28,10 +29,12 @@ defmodule TimesheetsWeb.RequestController do
 
   def show(conn, %{"id" => id}) do
     IO.puts("In show")
-    IO.inspect(conn)
     request = Requests.get_request!(id)
     changeset = Requests.change_request(request)
-    render(conn, "show.html", request: request, changeset: changeset)
+    tasks = Tasks.list_tasks_by_request_id(id)
+    IO.puts("tasks")
+    IO.inspect(tasks)
+    render(conn, "show.html", request: request, tasks: tasks, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do

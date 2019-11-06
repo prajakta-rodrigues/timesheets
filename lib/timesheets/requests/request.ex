@@ -7,6 +7,7 @@ defmodule Timesheets.Requests.Request do
     field :date, :date
     field :user_id, :id
     field :manager_id, :id
+    
 
     timestamps()
   end
@@ -18,5 +19,5 @@ defmodule Timesheets.Requests.Request do
     |> validate_required([:approval, :date, :user_id, :manager_id])
   end
 
-  
+
 end

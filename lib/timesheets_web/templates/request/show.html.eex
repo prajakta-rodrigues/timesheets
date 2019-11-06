@@ -14,6 +14,10 @@
 
 </ul>
 
+<span><%= link "View tasks", to: Routes.task_path(@conn, :index, request_id: @request.id) %></span>
+
+
+
 <%= if @current_user && @current_user.role == "manager" do %>
 <!-- <span><%= link "Approve", to:
 Routes.request_path(@conn, :edit, @request) %></span> -->

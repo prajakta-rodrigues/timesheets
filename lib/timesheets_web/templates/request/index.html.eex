@@ -22,8 +22,8 @@
       <%= if request.approval === true do %>
     <span>Approved</span>
       <% else %>
-        <span>Not Yet
-        </span>
+        <span>Not Yet Approved
+      </span>
 
       <% end %>
 </div>
@@ -35,6 +35,15 @@
     </div>
 
     </div>
+    <div class="col-md-4 col-sm-4">
+
+      <span><%= link "View Request", to: Routes.request_path(@conn, :show, request.id) %></span>
+      </span>
+        </div>
+
+        </div>
+
+
   </div>
 <% end %>
 <% else %>

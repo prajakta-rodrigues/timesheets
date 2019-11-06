@@ -1,0 +1,32 @@
+<h1>Listing Tasks for request <%= @request_id %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Job code</th>
+      <th>Time spent</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for task <- @tasks do %>
+    <tr>
+      <td><%= task.job_code %></td>
+      <td><%= task.time_spent %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.task_path(@conn, :show, task) %></span>
+        <%= if @request.approval == false && @current_user.role == "worker" do %>
+        <span><%= link "Edit", to: Routes.task_path(@conn, :edit, task) %></span>
+        <span><%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <% end %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+<%= if @request.approval == false && @current_user.role == "worker" do %>
+<span><%= link "New Task", to: Routes.task_path(@conn, :new, request_id: @request_id) %></span>
+<% end %>
+<span><%= link "Back", to: Routes.request_path(@conn, :show, @request_id) %></span>
